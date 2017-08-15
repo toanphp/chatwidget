@@ -1,0 +1,53 @@
+welcome-message{
+
+}
+
+<script>
+	var facebookPageId = "messengerify";
+</script>
+<script type="text/javascript" src="https://messengerify.me/api/chat-head/embed.js"></script>
+
+
+
+
+
+message-block{
+    clear: both; 
+    transition: all 0.3s ease; 
+    line-height: 1.5; 
+    font-style: normal; 
+    font-weight: normal; 
+    font-variant-ligatures: normal; 
+    font-variant-caps: normal; 
+    vertical-align: baseline; 
+    float: right; color: rgb(60, 60, 60); 
+    border-left: 3px solid rgb(58, 223, 112); 
+    box-shadow: rgba(0, 0, 0, 0.1) 2px 4px 14px 0px; 
+    background-color: white; margin: 10px 0px 0px; 
+    padding: 10px; 
+    border-top-width: 0px; 
+    border-right-width: 0px; 
+    border-bottom-width: 0px;
+}
+
+message-none{
+    clear: both; 
+    transition: all 0.3s ease; 
+    line-height: 1.5; 
+    font-style: normal; 
+    font-weight: normal; 
+    font-variant-ligatures: normal; 
+    font-variant-caps: normal; 
+    vertical-align: baseline; 
+    float: right; color: rgb(60, 60, 60); 
+    border-left: 3px solid rgb(58, 223, 112); 
+    box-shadow: rgba(0, 0, 0, 0.1) 2px 4px 14px 0px; 
+    background-color: white; margin: 10px 0px 0px; 
+    padding: 10px; 
+    border-top-width: 0px; 
+    border-right-width: 0px; 
+    border-bottom-width: 0px;
+    transform: scale(0); 
+    display: none; 
+    cursor: pointer; 
+}
