@@ -5,6 +5,11 @@
         <meta charset="UTF-8">
     </head>
     <body>
+        <?php 
+            if(isset($_GET['error']) && $_GET['error']) {
+                echo '<h1>FAILED: '.$_GET['error'].'</h1>';
+            }
+        ?>
         <h4>Đăng nhập</h4>
         <form action="login.php" method="post" >
             Tên đăng nhập: <input type="text" name="username" required/><br>
@@ -27,7 +32,7 @@
             &nbsp;&nbsp;Tải lên: <input type="file" name="logo2" accept="image/*" id="logo2" onchange="resetInput('logo1')" value="<?php echo (isset($_GET['logo'])&&substr($_GET['logo'], 0, 4)!='http') ? $_GET['logo'] : '';?>" /><br>
             Tên: <input type="text" name="name" value="<?php echo isset($_GET['name']) ? $_GET['name'] : '';?>" /><br>
             Màu: <input type="color" name="color" value="<?php echo isset($_GET['color']) ? $_GET['color'] : '';?>"/><br>
-            Trang Facebook: https://www.facebook.com/<input type="text" name="fb" value="<?php echo isset($_GET['fb']) ? $_GET['fb'] : '';?>" /><br>
+            Trang Facebook: https://www.facebook.com/<input type="text" name="facebookPage" value="<?php echo isset($_GET['facebookPage']) ? $_GET['facebookPage'] : '';?>" /><br>
             Tin nhắn 1: <input type="text" name="message1" value="<?php echo isset($_GET['message1']) ? $_GET['message1'] : '';?>" /><br>
             Tin nhắn 2: <input type="text" name="message2" value="<?php echo isset($_GET['message2']) ? $_GET['message2'] : '';?>" /><br>
             <input type="submit" name="submit" />

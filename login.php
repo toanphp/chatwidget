@@ -1,8 +1,12 @@
 <?php
+session_start();
+
+// LOG IN
 if(isset($_POST['login_submit'])) {
     $inputusername= $_POST['username'];
     $inputpassword= $_POST['password'];
 
+    // SERVER INFO
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -26,30 +30,31 @@ if(isset($_POST['login_submit'])) {
     catch(PDOException $e)
     {
         echo $sql . "<br>" . $e->getMessage();
+        die;
     }
 
-    $conn = null;
+
     if(isset($result) && $result!='') {
-        $_SESSION['userid'] = $result['id'];
+        setSessionLoggedIn($result['id']);
         $js_data= '';
         if(isset($result['widgetId']) && $result['widgetId']!=null) {
-            $_SESSION['hasWidget']= true;
-            $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+            $_SESSION['logged_in']['widgetId']= $result['widgetId'];
+            // $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
             // set the PDO error mode to exception
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            // $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $sql = 'SELECT logo, name, color, facebook, message1, message2
                     FROM properties
-                    WHERE id = "'.$result['widgetId'].'"';
+                    WHERE id = '.$result['widgetId'];
             $stmt = $conn->prepare($sql);
             $stmt->execute();
             // use exec() because no results are returned
             // $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $properties = $stmt->fetch(PDO::FETCH_ASSOC);
-            $js_data= '?logo='.$properties['logo'].'&name='.$properties['name'].'&color='.$properties['color'].'&fb='.$properties['facebook'].'&message1='.$properties['message1'].'&message2='.$properties['message2'];
+            // print_r($properties);die;
+            $js_data= '?logo='.$properties['logo'].'&name='.$properties['name'].'&color='. str_replace('#', '', $properties['color']) .'&facebookPage='.$properties['facebook'].'&message1='.$properties['message1'].'&message2='.$properties['message2'];
             // print_r($properties);die;
         }
         header('Location: test.php' . $js_data);
-        // print_r($result['id']);
         // header("Location:0");
     } else {
         echo 'nhập sai cmnr';
@@ -57,6 +62,21 @@ if(isset($_POST['login_submit'])) {
     
 }
 
+// REGISTER
 if(isset($_POST['register_submit'])) {
-    
+    $inputusername= $_POST['username'];
+    $inputpassword= $_POST['password'];
+    $inputrepassword= $_POST['re-password'];
+    if(1==1) {
+        // do something
+    }
+
+}
+
+function setSessionLoggedIn($userId) 
+{
+    session_unset();
+    $_SESSION['logged_in']['status']= true;
+    $_SESSION['logged_in']['userid']= $userId;
+    // print_r($_SESSION);die;
 }
